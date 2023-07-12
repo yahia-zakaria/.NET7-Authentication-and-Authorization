@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
+using System.Security.Claims;
 using static Org.BouncyCastle.Math.EC.ECCurve;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +31,6 @@ builder.Services.ConfigureApplicationCookie(opt =>
 	opt.LoginPath = "/Home/Login";
 	opt.LogoutPath = "/Home/Logout";
 });
-
 
 var mailKitOptions = builder.Configuration.GetSection("Email").Get<MailKitOptions>();
 builder.Services.AddMailKit(options => options.UseMailKit(mailKitOptions));

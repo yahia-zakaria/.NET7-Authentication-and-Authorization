@@ -43,7 +43,7 @@ namespace IdentityExample.Controllers
                 var signInResult = await _signInManager.PasswordSignInAsync(user, password, false, false);
                 if (signInResult.Succeeded)
                 {
-                    return RedirectToAction("Secret");
+                    return RedirectToAction("Index");
                 }
             }
             ViewBag.username = username;
