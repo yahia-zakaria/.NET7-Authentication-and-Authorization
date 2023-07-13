@@ -1,1 +1,11 @@
 ﻿<h1>Home Page</h1>
+
+@if(User.Identity.IsAuthenticated){
+	<h3>User is authenticated</h3>
+}else{
+	<h3>User is NOT authenticated</h3>
+}
+
+@if ((await _authService.AuthorizeAsync(User, "Claim.DOB")).Succeeded){
+	<h3>User has DOB claim</h3>
+}

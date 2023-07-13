@@ -58,5 +58,22 @@ namespace Basics.Controllers
 
             return RedirectToAction("Index");
         }
-    }
+		public async Task<IActionResult> DoStuff([FromServices] IAuthorizationService authorizationService)
+		{
+			// we are doing stuff here
+
+			var customPolicy = new AuthorizationPolicyBuilder("Schema")
+                .RequireClaim("Hello")
+                .Build();
+
+			var authResult = await authorizationService.AuthorizeAsync(User, customPolicy);
+
+			if (authResult.Succeeded)
+			{
+				return View("Index");
+			}
+
+			return View("Index");
+		}
+	}
 }
