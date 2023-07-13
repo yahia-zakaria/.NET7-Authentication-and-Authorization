@@ -1,10 +1,14 @@
 using Basics.AuthorizationRequirements;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(config =>
+{
+	config.Filters.Add(new AuthorizeFilter());
+});
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 	.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, configureOptions =>
 	{
