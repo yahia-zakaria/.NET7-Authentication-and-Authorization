@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
-using System.Security.Claims;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();

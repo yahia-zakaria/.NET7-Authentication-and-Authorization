@@ -1,4 +1,6 @@
 using Basics.AuthorizationRequirements;
+using Basics.Transformer;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -15,7 +17,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 		configureOptions.LoginPath = "/Home/Authenticate";
 		configureOptions.Cookie.Name = "Grandmas.Cookei";
 	});
+
 builder.Services.AddScoped<IAuthorizationHandler, CustomRequireClaimHandler>();
+builder.Services.AddScoped<IClaimsTransformation, ClaimsTransformation>();
+
 builder.Services.AddAuthorization(config =>
 {
     config.AddPolicy("Claim.DOB", builder =>

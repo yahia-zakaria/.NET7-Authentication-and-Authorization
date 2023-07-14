@@ -29,6 +29,7 @@ namespace Basics.Controllers
         {
             return View("Secret");
         }
+        [AllowAnonymous]
         public IActionResult Authenticate(string returnUrl)
         {
             var grandmasClaims = new List<Claim>()
