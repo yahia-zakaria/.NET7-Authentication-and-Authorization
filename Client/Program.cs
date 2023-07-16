@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews()
 	.AddRazorRuntimeCompilation();
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddAuthentication(config =>
 {
 	//to chech the cookie if the user is authenticated

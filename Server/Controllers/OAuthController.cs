@@ -53,7 +53,7 @@ namespace Server.Controllers
 		}
 
 		[AllowAnonymous]
-		public async Task<IActionResult> Token(
+		public IActionResult Token(
 			string grant_type, // flow of access_token request
 			string code, // confirmation of the authentication process
 			string redirect_uri,
@@ -94,18 +94,18 @@ namespace Server.Controllers
 			};
 
 			var responseJson = JsonConvert.SerializeObject(responseObject);
-			var responseBytes = Encoding.UTF8.GetBytes(responseJson);
-
-			//await Response.Body.WriteAsync(responseBytes, 0, responseBytes.Length);
 
 			return Ok(responseObject);
 		}
+
+		public IActionResult Validate()
+		{
+			if(HttpContext.Request.Query.TryGetValue("access_token", out var accessToken))
+			{
+				return Ok();
+			}
+			return BadRequest();
+		}
 	}
 
-	public class OAuthToken
-	{
-		public string access_token { get; set; }
-		public string token_type { get; set; }
-		public string raw_claim { get; set; }
-	} 
 }
