@@ -81,7 +81,7 @@ namespace Server.Controllers
 				audiance,
 				claims,
 				notBefore: DateTime.Now,
-				expires: DateTime.Now.AddMinutes(5),
+				expires: grant_type == "refresh_token"? DateTime.Now.AddMinutes(5) : DateTime.Now.AddMilliseconds(1),
 				signingCredentials);
 
 			var access_token = new JwtSecurityTokenHandler().WriteToken(token);
@@ -90,7 +90,8 @@ namespace Server.Controllers
 			{
 				access_token,
 				token_type = "Bearer",
-				raw_claim = "oauthTutorial"
+				raw_claim = "oauthTutorial",
+				refresh_token = "RefreshTokenSampleValueSomething77"
 			};
 
 			var responseJson = JsonConvert.SerializeObject(responseObject);

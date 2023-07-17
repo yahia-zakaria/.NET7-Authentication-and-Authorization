@@ -1,9 +1,12 @@
+using API;
 using API.AuthRequirements;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication("DefaultAuth")
+				.AddScheme<AuthenticationSchemeOptions, CustomeAuthenticationHandler>("DefaultAuth", null);
 builder.Services.AddAuthorization(config =>
 {
 	config.DefaultPolicy = new AuthorizationPolicyBuilder()

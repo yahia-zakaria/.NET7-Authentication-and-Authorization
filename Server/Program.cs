@@ -24,7 +24,7 @@ builder.Services.AddAuthentication("OAuth")
 		var key = new SymmetricSecurityKey(keyBytes);
 		config.TokenValidationParameters = new TokenValidationParameters
 		{
-			//ClockSkew = TimeSpan.Zero,
+			ClockSkew = TimeSpan.Zero,
 			ValidAudience = builder.Configuration.GetSection("JwtToken")["Audience"],
 			ValidIssuer = builder.Configuration.GetSection("JwtToken")["Issuer"],
 			IssuerSigningKey = key
